@@ -52,7 +52,7 @@ export default function Notes({ tag }: NotesProps) {
   });
 
   const handleCreateNote = async (payload: CreateNotePayload) => {
-    if (!createModalOpen) return; // blokada wielokrotnego otwarcia
+    if (!createModalOpen) return; 
     try {
       await createMutation.mutateAsync(payload);
     } catch (e) {

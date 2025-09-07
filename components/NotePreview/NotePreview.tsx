@@ -18,7 +18,7 @@ export default function NotePreview({ noteId }: Props) {
   });
 
   const handleClose = () => {
-    router.back(); // returns to previous page (filtered notes)
+    router.back();
   };
 
   if (isLoading) return <Modal onClose={handleClose}>Loading...</Modal>;
