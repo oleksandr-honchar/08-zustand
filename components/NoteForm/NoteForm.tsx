@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import css from "./NoteForm.module.css";
-import { useNoteStore } from "@/lib/stores/noteStore"; 
+import { useNoteStore } from "@/lib/stores/noteStore";
 import type { CreateNotePayload } from "@/lib/api";
 
 export interface NoteFormProps {
@@ -16,23 +16,41 @@ export default function NoteForm({ onAdd, onCancel }: NoteFormProps) {
   const [content, setContent] = useState(draft?.content || "");
   const [tag, setTag] = useState<CreateNotePayload["tag"]>(draft?.tag || "Todo");
 
-useEffect(() => {
-  const timeout = setTimeout(() => saveDraft({ title, content, tag }), 300);
-  return () => clearTimeout(timeout);
-}, [title, content, tag, saveDraft]);
+  useEffect(() => {
+    saveDraft({ title, content, tag });
+  }, [title, content, tag, saveDraft]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const payload: CreateNotePayload = { title, content, tag };
+
+    if (title.trim().length < 3) {
+      alert("Title must be at least 3 characters long");
+      return;
+    }
+    if (title.trim().length > 50) {
+      alert("Title must be at most 50 characters long");
+      return;
+    }
+    if (content.trim().length > 500) {
+      alert("Content must be at most 500 characters long");
+      return;
+    }
+    if (!tag) {
+      alert("Tag is required");
+      return;
+    }
+
+    const payload: CreateNotePayload = { title: title.trim(), content: content.trim(), tag };
     if (onAdd) await onAdd(payload);
-    clearDraft(); 
+
+    clearDraft();
     setTitle("");
     setContent("");
     setTag("Todo");
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
+    <form className={css.form} onSubmit={handleSubmit} noValidate>
       <div className={css.formGroup}>
         <label htmlFor="title">Title</label>
         <input

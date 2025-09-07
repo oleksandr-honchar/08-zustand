@@ -11,14 +11,14 @@ export const metadata: Metadata = {
     url: "https://yourdomain.com/notes/action/create",
     images: [],
   },
-  };
+};
 
 export default function CreateNotePage() {
   return (
     <main className={css.main}>
       <div className={css.container}>
         <h1 className={css.title}>Create note</h1>
-        <NoteForm onAdd={() => {}} onCancel={() => {}} />
+        <NoteForm />
       </div>
     </main>
   );
