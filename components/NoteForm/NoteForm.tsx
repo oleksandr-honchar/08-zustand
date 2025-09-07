@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import css from "./NoteForm.module.css";
-import { useNoteStore } from "@/lib/stores/noteStore";
+import { useNoteStore } from "@/lib/store/noteStore";
 import type { CreateNotePayload } from "@/lib/api";
 
 export interface NoteFormProps {
