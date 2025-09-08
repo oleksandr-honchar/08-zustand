@@ -9,7 +9,12 @@ export const metadata: Metadata = {
     title: "Create Note",
     description: "Create a new note quickly and easily.",
     url: "https://08-zustand-three-rho.vercel.app/notes/action/create",
-    images: [],
+    images: [{
+        url: "https://08-zustand-three-rho.vercel.app/og-create-note.png",
+        width: 1200,
+        height: 630,
+        alt: "Create a new note preview",
+      },],
   },
 };
 
